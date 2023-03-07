@@ -16,19 +16,21 @@ public class LoginInterceptorAspect {
     private Logger logger = Logger.getLogger(LoginInterceptorAspect.class.getName());
 
     @Around("execution(* com.harshitprajapati.harshitproject.*.*(..))")
-    public void login(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object login(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        Object[] arguments = joinPoint.getArgs();
+        String arguments = (String) joinPoint.getArgs()[0];
 
         logger.info("Login Interceptor Aspect: Calling the intercepted method");
 
         try (FileWriter fileWriter = new FileWriter("Username.txt")) {
-            fileWriter.write(String.valueOf(arguments));
+            fileWriter.write(arguments);
+            fileWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        joinPoint.proceed();
         logger.info("Login Interceptor Aspect: Method executed and intercepted username and written to file.");
+
+        return joinPoint.proceed();
     }
 }
