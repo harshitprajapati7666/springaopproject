@@ -18,15 +18,12 @@ public class LoginInterceptorAspect {
     @Around("execution(* com.harshitprajapati.harshitproject.*.*(..))")
     public void login(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        String methodName = joinPoint.getSignature().getName();
         Object[] arguments = joinPoint.getArgs();
 
         logger.info("Login Interceptor Aspect: Calling the intercepted method");
 
-        String newArguments = String.valueOf(arguments);
-
         try (FileWriter fileWriter = new FileWriter("Username.txt")) {
-            fileWriter.write(newArguments);
+            fileWriter.write(String.valueOf(arguments));
         } catch (IOException e) {
             e.printStackTrace();
         }
