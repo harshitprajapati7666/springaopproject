@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.logging.Logger;
 
@@ -18,12 +19,12 @@ public class LoginInterceptorAspect {
     public Object login(ProceedingJoinPoint joinPoint) throws Throwable {
 
         final String fileName = "Username.txt";
-        Object[] arguments = joinPoint.getArgs();
-        String content = String.valueOf(arguments);
+        Object arguments = joinPoint.getArgs()[0];
+        String content = arguments.toString();
 
         logger.info("Login Interceptor Aspect: Calling the intercepted method");
 
-        try (FileWriter fileWriter = new FileWriter("Username.txt")) {
+        try (var fileWriter = new BufferedWriter(new FileWriter(fileName))) {
             fileWriter.write(content);
             fileWriter.flush();
         }
