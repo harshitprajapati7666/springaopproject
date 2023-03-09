@@ -1,6 +1,6 @@
 package com.harshitprajapati.harshitproject;
 
-public class Login {
+public class UserLogin {
 
     private String username;
     private String password;

@@ -9,7 +9,7 @@ public class LoginService {
 
     private Logger logger = Logger.getLogger(LoginService.class.getName());
 
-    public void login(Login login) {
-        logger.info("Login Method:-\nUsername = " + login.getUsername() + "\nPassword = " + login.getPassword());
+    public void login(UserLogin userLogin) {
+        logger.info("Login Method:-\nUsername = " + userLogin.getUsername() + "\nPassword = " + userLogin.getPassword());
     }
 }

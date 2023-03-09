@@ -10,10 +10,10 @@ public class Main {
 
         var service = c.getBean(LoginService.class);
 
-        Login login = new Login();
-        login.setUsername("Harshit");
-        login.setPassword("Prajapati");
+        UserLogin userLogin = new UserLogin();
+        userLogin.setUsername("Harshit");
+        userLogin.setPassword("Prajapati");
 
-        service.login(login);
+        service.login(userLogin);
     }
 }
